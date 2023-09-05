@@ -126,7 +126,40 @@ function addRole() {
 }
 
 function addEmployee() {
-
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'firstName',
+                message: "What is the employee's first name?"
+            },
+            {
+                type: 'input',
+                name: 'lastName',
+                message: "What is the employee's last name?"
+            },
+            {
+                type: 'input',
+                name: 'employeeRole',
+                message: "What is the employee's role id?"
+            },
+            {
+                type: 'input',
+                name: 'manager',
+                message: "What is the employee's manager id?"
+            },
+        ]).then((data) => {
+            db.query(
+                `INSERT INTO employee SET ?`, {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                role_id: data.employeeRole,
+                manager_id: data.manager
+            }
+            )
+            console.log(`Added ${data.firstName} ${data.lastName} to the database`);
+            prompt()
+        })
 }
 
 function updateEmployee() {
