@@ -83,7 +83,7 @@ function addDepartment() {
                 name: 'departmentName',
                 message: 'What is the name of the department?'
             }
-        ]).then(data => {
+        ]).then((data) => {
             db.query(
                 `INSERT INTO department SET ?`, {
                 department_name: data.departmentName
@@ -95,7 +95,34 @@ function addDepartment() {
 }
 
 function addRole() {
-
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'roleName',
+                message: 'What is the name of the role?'
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'What is the salary of the role?'
+            },
+            {
+                type: 'input',
+                name: 'roleDepartment',
+                message: 'Which department does the role belong to?'
+            },
+        ]).then((data) => {
+            db.query(
+                `INSERT INTO roles SET ?`, {
+                title: data.roleName,
+                salary: data.salary,
+                department_id: data.roleDepartment
+            }
+            )
+            console.log(`Added ${data.roleName} to the database`);
+            prompt()
+        })
 }
 
 function addEmployee() {
