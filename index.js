@@ -58,7 +58,12 @@ function allDepartments() {
 }
 
 function allRoles() {
-
+    db.query(`SELECT * FROM employee`,
+        function (err, res) {
+            if (err) throw err
+            console.table(res)
+            prompt()
+        })
 }
 
 function allEmployees() {
