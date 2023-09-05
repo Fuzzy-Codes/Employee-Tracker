@@ -49,7 +49,12 @@ function prompt() {
 }
 
 function allDepartments() {
-
+    db.query(`SELECT * FROM roles`,
+        function (err, res) {
+            if (err) throw err
+            console.table(res)
+            prompt()
+        })
 }
 
 function allRoles() {
