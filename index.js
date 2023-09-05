@@ -76,7 +76,22 @@ function allEmployees() {
 }
 
 function addDepartment() {
-
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'departmentName',
+                message: 'What is the name of the department?'
+            }
+        ]).then(data => {
+            db.query(
+                `INSERT INTO department SET ?`, {
+                department_name: data.departmentName
+            }
+            )
+            console.log(`Added ${data.departmentName} to the database`);
+            prompt()
+        })
 }
 
 function addRole() {
