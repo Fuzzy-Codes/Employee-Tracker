@@ -5,7 +5,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "employee_db"
+    database: "employeeTracker_db"
 });
 
 db.connect(function (err) {
@@ -13,3 +13,35 @@ db.connect(function (err) {
     console.log("MySQL Connected")
     prompt();
 });
+
+function prompt() {
+
+}
+
+function allDepartments() {
+
+}
+
+function allRoles() {
+
+}
+
+function allEmployees() {
+
+}
+
+function addDepartment() {
+
+}
+
+function addRole() {
+
+}
+
+function addEmployee() {
+
+}
+
+function updateEmployee() {
+
+};
