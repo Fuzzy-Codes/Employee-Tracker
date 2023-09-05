@@ -49,7 +49,7 @@ function prompt() {
 }
 
 function allDepartments() {
-    db.query(`SELECT * FROM roles`,
+    db.query(`SELECT * FROM department`,
         function (err, res) {
             if (err) throw err
             console.table(res)
@@ -58,7 +58,7 @@ function allDepartments() {
 }
 
 function allRoles() {
-    db.query(`SELECT * FROM employee`,
+    db.query(`SELECT * FROM roles`,
         function (err, res) {
             if (err) throw err
             console.table(res)
@@ -67,7 +67,12 @@ function allRoles() {
 }
 
 function allEmployees() {
-
+    db.query(`SELECT * FROM employee`,
+        function (err, res) {
+            if (err) throw err
+            console.table(res)
+            prompt()
+        })
 }
 
 function addDepartment() {
