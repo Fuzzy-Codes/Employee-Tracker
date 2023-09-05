@@ -163,5 +163,48 @@ function addEmployee() {
 }
 
 function updateEmployee() {
+    db.query(`SELECT * FROM employee`, (err, data) => {
+        if (err) throw err;
+        const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " " + last_name, value: id }));
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'name',
+                message: "Which employee would you like to update?",
+                choices: employees
+            }
+        ])
+            .then((data) => {
+                const employee = data.name;
+                const params = [];
+                params.push(employee);
 
+                db.query(`SELECT * FROM roles`, (err, data) => {
+                    if (err) throw err;
+                    const roles = data.map(({ id, title }) => ({ name: title, value: id }));
+                    inquirer.prompt([
+                        {
+                            type: 'list',
+                            name: 'role',
+                            message: "What is the employee's new role?",
+                            choices: roles
+                        }
+                    ])
+                        .then((data) => {
+                            const role = data.role;
+                            params.push(role);
+
+                            let employee = params[0]
+                            params[0] = role
+                            params[1] = employee
+
+                            db.query(`UPDATE employee SET role_id = ? WHERE id = ?`, params, (err, res) => {
+                                if (err) throw err;
+                                console.log("Employee has been updated!");
+                                prompt();
+                            });
+                        });
+                });
+            });
+    });
 };
